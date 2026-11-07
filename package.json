@@ -1,0 +1,24 @@
+{
+  "name": "8boy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "8BOY – Fantasy-Handheld als PWA mit Lua-Kartridges",
+  "type": "module",
+  "homepage": "https://8boy.yourleaf.de",
+  "repository": "github:yourleaf-gmbh/8boy",
+  "bugs": "https://github.com/yourleaf-gmbh/8boy/issues",
+  "author": "YOURLEAF GmbH <support@yourleaf.de>",
+  "license": "MIT AND CC-BY-SA-4.0",
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "test": "node tools/test-carts.mjs",
+    "check": "node tools/test-carts.mjs && node tools/test-compat.mjs && node tools/test-mp.mjs",
+    "lobby": "node server/lobby.mjs",
+    "build": "node tools/build.mjs"
+  },
+  "devDependencies": {
+    "fengari": "^0.1.5",
+    "fengari-web": "^0.1.4",
+    "playwright": "^1.64.1"
+  }
+}

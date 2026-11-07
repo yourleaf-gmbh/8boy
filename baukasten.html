@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>8BOY Baukasten</title>
+  <meta name="description" content="8BOY Baukasten – Spiele für die 8BOY-Konsole zusammenklicken, ohne zu programmieren. Heraus kommt eine echte Lua-Kartridge.">
+  <meta name="theme-color" content="#15161c">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/baukasten.css">
+</head>
+<body>
+  <div class="bk" id="bk">
+    <header class="bk-top">
+      <a class="bk-logo" href="index.html" title="Zur Konsole"><canvas id="logo" width="10" height="10" aria-hidden="true"></canvas><span class="sr">8BOY Baukasten</span></a>
+      <div class="bk-proj">
+        <input id="projTitle" class="bk-title-in" aria-label="Titel des Spiels" spellcheck="false">
+        <span class="bk-saved" id="saved" aria-live="polite">gespeichert</span>
+      </div>
+      <div class="bk-top-tools">
+        <button class="ib" id="undo" title="Rückgängig (Strg+Z)" aria-label="Rückgängig"><svg viewBox="0 0 16 16"><path d="M5 3 1 7l4 4M1.5 7H10a4 4 0 0 1 0 8H7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <button class="ib" id="redo" title="Wiederholen (Strg+Y)" aria-label="Wiederholen"><svg viewBox="0 0 16 16"><path d="m11 3 4 4-4 4M14.5 7H6a4 4 0 0 0 0 8h3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <button class="chk" id="checkBtn" title="Was fehlt noch?"><span id="checkCount">0</span> Hinweise</button>
+        <button class="play-btn" id="playBtn" title="Kartridge bauen und in der Konsole spielen"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>Spielen</button>
+      </div>
+    </header>
+    <nav class="bk-nav" id="nav" aria-label="Bereiche"></nav>
+    <main class="bk-main" id="main" tabindex="-1"></main>
+    <aside class="bk-side" id="side" aria-label="Eigenschaften"></aside>
+  </div>
+  <div class="bk-small" role="note">
+    <canvas id="logoSmall" width="10" height="10" aria-hidden="true"></canvas>
+    <p><b>Der Baukasten braucht Platz.</b> Am besten am Computer mit einem großen Bildschirm öffnen.</p>
+    <a href="index.html">Zur Konsole</a>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="config.js"></script>
+  <script src="vendor/fengari-web.js"></script>
+  <script type="module" src="js/baukasten/app.js"></script>
+</body>
+</html>

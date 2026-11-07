@@ -1,0 +1,9 @@
+{
+ "paket": "giga-test",
+ "version": 1,
+ "standard": { "vorab": true, "lizenz": "CC0", "quelle": "YOURLEAF, gebaut mit tools/giga/jetski_test.py" },
+ "assets": {
+  "jetski": { "datei": "jetski.glb" },
+  "notiz": { "datei": "notiz.json", "vorab": false }
+ }
+}

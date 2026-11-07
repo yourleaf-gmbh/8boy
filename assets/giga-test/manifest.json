@@ -1,0 +1,23 @@
+{
+ "paket": "giga-test",
+ "version": 1,
+ "gebaut": "2026-10-30",
+ "assets": {
+  "jetski": {
+   "datei": "0f2e0993d0686029.b8m",
+   "typ": "modell",
+   "groesse": 14288,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/jetski_test.py"
+  },
+  "notiz": {
+   "datei": "631d105a1d994e52.json",
+   "typ": "daten",
+   "groesse": 43,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/jetski_test.py"
+  }
+ }
+}

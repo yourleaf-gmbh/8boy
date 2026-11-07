@@ -1,0 +1,71 @@
+{
+ "paket": "giga-demo",
+ "version": 1,
+ "gebaut": "2026-10-29",
+ "assets": {
+  "kugel": {
+   "datei": "3fb2fe5aa0722890.b8m",
+   "typ": "modell",
+   "groesse": 47589,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "kiste.farbe": {
+   "datei": "5602d25727085c30.png",
+   "typ": "bild",
+   "groesse": 103853,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "kiste.normal": {
+   "datei": "f971796d8a843661.png",
+   "typ": "bild",
+   "groesse": 71710,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "kiste.rm": {
+   "datei": "5536d1243da9ffd5.png",
+   "typ": "bild",
+   "groesse": 55481,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "kiste": {
+   "datei": "2305193aef9aec07.b8m",
+   "typ": "modell",
+   "groesse": 568,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "fliesen.farbe": {
+   "datei": "99084fbc86849949.png",
+   "typ": "bild",
+   "groesse": 232870,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "fliesen.normal": {
+   "datei": "a930610f6f2b583f.png",
+   "typ": "bild",
+   "groesse": 329065,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  },
+  "fliesen.rm": {
+   "datei": "5932cee2b6bd9bce.png",
+   "typ": "bild",
+   "groesse": 3561,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)"
+  }
+ }
+}

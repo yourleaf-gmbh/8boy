@@ -1,0 +1,99 @@
+{
+ "paket": "giga-welt",
+ "version": 1,
+ "standard": {
+  "vorab": true,
+  "lizenz": "CC0",
+  "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+ },
+ "assets": {
+  "insel-0-0": {
+   "datei": "insel-0-0.b8m",
+   "vorab": false
+  },
+  "insel-1-0": {
+   "datei": "insel-1-0.b8m",
+   "vorab": true
+  },
+  "insel-2-0": {
+   "datei": "insel-2-0.b8m",
+   "vorab": true
+  },
+  "insel-3-0": {
+   "datei": "insel-3-0.b8m",
+   "vorab": false
+  },
+  "insel-0-1": {
+   "datei": "insel-0-1.b8m",
+   "vorab": false
+  },
+  "insel-1-1": {
+   "datei": "insel-1-1.b8m",
+   "vorab": true
+  },
+  "insel-2-1": {
+   "datei": "insel-2-1.b8m",
+   "vorab": true
+  },
+  "insel-3-1": {
+   "datei": "insel-3-1.b8m",
+   "vorab": false
+  },
+  "insel-0-2": {
+   "datei": "insel-0-2.b8m",
+   "vorab": false
+  },
+  "insel-1-2": {
+   "datei": "insel-1-2.b8m",
+   "vorab": false
+  },
+  "insel-2-2": {
+   "datei": "insel-2-2.b8m",
+   "vorab": false
+  },
+  "insel-3-2": {
+   "datei": "insel-3-2.b8m",
+   "vorab": false
+  },
+  "insel-0-3": {
+   "datei": "insel-0-3.b8m",
+   "vorab": false
+  },
+  "insel-1-3": {
+   "datei": "insel-1-3.b8m",
+   "vorab": false
+  },
+  "insel-2-3": {
+   "datei": "insel-2-3.b8m",
+   "vorab": false
+  },
+  "insel-3-3": {
+   "datei": "insel-3-3.b8m",
+   "vorab": false
+  },
+  "baum": {
+   "datei": "baum.b8m",
+   "lod": [
+    0.3
+   ]
+  },
+  "fels": {
+   "datei": "fels.b8m",
+   "lod": [
+    0.3
+   ]
+  },
+  "buggy": {
+   "datei": "buggy.b8m"
+  },
+  "rad": {
+   "datei": "rad.b8m"
+  },
+  "baum.lod2": {
+   "datei": "baum.lod2.b8m"
+  },
+  "fels.lod2": {
+   "datei": "fels.lod2.b8m"
+  }
+ }
+}

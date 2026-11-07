@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Sicherheitslücke melden
+    url: https://github.com/yourleaf-gmbh/8boy/blob/main/SECURITY.md
+    about: Bitte nicht als öffentliches Issue – so meldest du eine Lücke vertraulich.
+  - name: 8BOY spielen
+    url: https://8boy.yourleaf.de
+    about: Die Konsole im Browser.

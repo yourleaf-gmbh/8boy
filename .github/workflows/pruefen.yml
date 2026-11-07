@@ -1,0 +1,31 @@
+name: Prüfen
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: JavaScript lässt sich parsen
+        run: for f in js/*.js js/baukasten/*.js server/*.mjs tools/*.mjs; do node --check "$f" || exit 1; done
+      - name: Kartridges ohne Browser
+        run: node tools/test-carts.mjs
+      - name: Kompatibilität Bild für Bild
+        run: node tools/test-compat.mjs
+      - name: Lobby (Mehrspieler, Handy-Controller)
+        run: node tools/test-mp.mjs
+      - name: Statischer Build
+        run: npm run build

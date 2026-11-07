@@ -1,0 +1,46 @@
+name: Fehler melden
+description: Etwas funktioniert nicht wie erwartet.
+labels: [fehler]
+body:
+  - type: textarea
+    id: was
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du erwartet, was ist stattdessen passiert? Gern mit Bildschirmfoto.
+    validations:
+      required: true
+  - type: textarea
+    id: schritte
+    attributes:
+      label: Schritte zum Nachstellen
+      placeholder: |
+        1. Kartridge „…“ aus dem Store holen und einlegen
+        2. …
+    validations:
+      required: true
+  - type: input
+    id: kartridge
+    attributes:
+      label: Kartridge und Konsole
+      placeholder: z. B. Lektion 1: Hallo 8BOY auf dem 8BOY 16
+  - type: input
+    id: geraet
+    attributes:
+      label: Gerät, Betriebssystem, Browser
+      placeholder: z. B. Android 15, Chrome 140 / Windows 11, Firefox 145
+    validations:
+      required: true
+  - type: dropdown
+    id: wo
+    attributes:
+      label: Wo?
+      options:
+        - https://8boy.yourleaf.de
+        - lokal (npm start)
+        - eigene Instanz
+  - type: textarea
+    id: konsole
+    attributes:
+      label: Fehlermeldung
+      description: Fehlerbildschirm der Konsole oder Ausgabe der Browser-Konsole (F12), falls vorhanden.
+      render: text

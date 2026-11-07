@@ -1,0 +1,8 @@
+{
+ "paket": "giga-figuren",
+ "version": 1,
+ "standard": { "vorab": true, "lizenz": "CC0", "quelle": "YOURLEAF, gebaut mit tools/giga/figur_pilot.py (Blender)" },
+ "assets": {
+  "pilot": { "datei": "pilot.glb", "figur": true }
+ }
+}

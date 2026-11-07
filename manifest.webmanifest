@@ -1,0 +1,22 @@
+{
+  "name": "8BOY Fantasy Handheld",
+  "short_name": "8BOY",
+  "description": "Fantasy-Handheld im Browser: Lua-Kartridges programmieren, einlegen, spielen.",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#15161c",
+  "theme_color": "#15161c",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "file_handlers": [
+    { "action": "./", "accept": { "text/x-lua": [".lua", ".8b"] } }
+  ]
+}

@@ -1,0 +1,64 @@
+8BOY – Lizenzen
+===============
+
+Herausgeberin: YOURLEAF GmbH, Zur Zugbrücke 2, 26203 Wardenburg · support@yourleaf.de
+Quelltext: https://github.com/yourleaf-gmbh/8boy
+
+8BOY ist ein unabhängiges Projekt der YOURLEAF GmbH und steht in keiner Verbindung zu
+Nintendo, Sony, Microsoft oder Sega. Genannte Marken gehören ihren Inhabern.
+
+
+Programmcode – MIT-Lizenz
+-------------------------
+
+Copyright (c) 2026 YOURLEAF GmbH
+
+Gilt für den Code der Konsole (HTML, CSS, JavaScript), die Werkzeuge, den
+Lobby-Server und den Lua-Code der Kartridges. Volltext: Datei LICENSE.
+
+
+Inhalte – CC BY-SA 4.0
+----------------------
+
+Copyright (c) 2026 YOURLEAF GmbH
+
+Grafiken, Texte, Anleitungsheft und Melodien der Beispiel-Kartridge,
+Titelbilder der Packungen und Programmsymbole stehen unter
+Creative Commons Namensnennung – Weitergabe unter gleichen Bedingungen 4.0
+International (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/deed.de
+Volltext: Datei LICENSE-CONTENT.
+
+Asset-Pakete des 8BOY 128 (assets/): CC0 1.0, wie in ihren Manifesten angegeben.
+
+
+Lektionen und Lernspiele
+------------------------
+
+Lektionen, Konzept-Demos und die Lernspiele „Stadtpark 8-Bit“ und „Datenspur“ liegen
+im Repository https://github.com/yourleaf-gmbh/8boy-lernspiele (Code MIT, Inhalte
+CC BY-SA 4.0) und kommen über einen Katalog in den Store. Ihre Lizenz steht dort und
+im Kopf jeder Kartridge.
+
+Jede Kartridge ist zugleich ihr eigener Quelltext: Im Regal lässt sie sich über
+„⇩ Lua“ herunterladen und im 8BOY Studio ansehen und verändern.
+
+
+Bestandteile von Dritten
+------------------------
+
+fengari-web (Lua-VM für JavaScript, enthält fengari und fengari-interop),
+vendor/fengari-web.js
+  Copyright © 2017-2018 Benoit Giannangeli, Copyright © 2017-2018 Daurnimator
+  Lua: Copyright © 1994-2017 Lua.org, PUC-Rio
+  MIT License – vollständiger Text: vendor/fengari-LICENSE.txt
+
+sprintf-js (in fengari-web enthalten)
+  Copyright (c) 2007-present, Alexandru Mărășteanu
+  BSD-3-Clause – vollständiger Text: vendor/sprintf-js-LICENSE.txt
+
+Atkinson Hyperlegible (Schrift der UI-Ebene), vendor/AtkinsonHyperlegible-*.ttf
+  Copyright 2020 Braille Institute of America, Inc.
+  SIL Open Font License 1.1 – vollständiger Text: vendor/AtkinsonHyperlegible-OFL.txt
+
+Übersicht: THIRD_PARTY.md

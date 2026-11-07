@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "Wenn du 8BOY oder die Lernspiele daraus verwendest, zitiere es bitte so."
+title: "8BOY – Fantasy-Handheld im Browser"
+type: software
+authors:
+  - name: "YOURLEAF GmbH"
+    email: "support@yourleaf.de"
+repository-code: "https://github.com/yourleaf-gmbh/8boy"
+url: "https://8boy.yourleaf.de"
+license:
+  - MIT
+  - CC-BY-SA-4.0
+version: 1.0.0
+keywords:
+  - fantasy console
+  - Lua
+  - PWA
+  - Programmieren lernen
+abstract: >-
+  Fantasy-Konsolen als Progressive Web App: Lua-Kartridges per Drag & Drop, eingebautes Studio mit Editor,
+  Malprogramm und 3D-Werkstatt, Baukasten, Packungen mit Anleitungsheft, PNG-Kartridges, TV-Modus mit Handy als
+  Controller und Lobby-Server für Mehrspieler. Lektionen und Lernspiele: Repository 8boy-lernspiele.
+  Code MIT, Inhalte CC BY-SA 4.0.

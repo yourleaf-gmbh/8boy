@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>8BOY</title>
+  <meta name="description" content="8BOY – ein Fantasy-Handheld im Browser. Kartridges in Lua programmieren, per Drag & Drop einlegen und spielen.">
+  <meta name="theme-color" content="#15161c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/console.css">
+  <link rel="stylesheet" href="css/unbox.css">
+  <link rel="stylesheet" href="css/dock.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <section class="editor" id="editor" hidden aria-label="Code-Editor">
+      <div class="ed-bar">
+        <span class="ed-brand">8BOY <i>Studio</i></span>
+        <span class="ed-title" id="edTitle">Kartridge</span>
+        <button class="tb tb-run" id="edRun" title="Starten (Strg+Enter)">▶ Starten</button>
+        <button class="tb tb-live" id="edLive" title="Code ins laufende Spiel laden – ohne Neustart, der Spielstand bleibt">↻<span class="lbl"> Live</span></button>
+        <button class="tb" id="edSave" title="Ins Regal speichern (Strg+S)">Speichern</button>
+        <span class="ed-new-wrap">
+          <button class="tb" id="edNew" title="Neue Kartridge aus Vorlage">Neu ▾</button>
+          <div class="ed-new" id="edNewMenu" hidden></div>
+        </span>
+        <span class="ed-break" aria-hidden="true"></span>
+        <button class="tb" data-side="cart" title="Titel, Farbe, Etikett">Kartridge</button>
+        <button class="tb" data-side="sprites" title="Sprites malen">Sprites</button>
+        <button class="tb" data-side="model3d" title="3D-Werkstatt: Modelle bauen und OBJ-Dateien laden">3D</button>
+        <button class="tb" data-side="help" title="Alle Befehle">Befehle</button>
+        <button class="tb" data-side="debug" title="Fehlersuche: Haltepunkte, Variablen, Beobachten">Fehler<span class="lbl">suche</span></button>
+        <button class="tb" id="edDownload" title="Als .lua-Datei herunterladen">⇩</button>
+        <button class="tb tb-close" id="edClose" title="Studio schließen">✕</button>
+      </div>
+      <div class="ed-body">
+        <div class="ed-code">
+          <pre class="ed-gutter" id="edGutter" aria-hidden="true"></pre>
+          <div class="ed-area">
+            <pre class="ed-hl" id="edHl" aria-hidden="true"></pre>
+            <textarea id="edText" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" aria-label="Lua-Code"></textarea>
+            <div class="ac" id="edAc" hidden></div>
+            <div class="sig" id="edSig" hidden></div>
+          </div>
+        </div>
+        <aside class="ed-side" id="edSide" hidden>
+          <div class="ed-tabs">
+            <button data-tab="cart">Kartridge</button>
+            <button data-tab="sprites">Sprites</button>
+            <button data-tab="model3d">3D</button>
+            <button data-tab="help">Befehle</button>
+            <button data-tab="debug">Fehlersuche</button>
+            <button class="tb-close" id="edSideClose" aria-label="Seitenleiste schließen">✕</button>
+          </div>
+          <div class="ed-pane" data-pane="cart" id="edCartPanel" hidden></div>
+          <div class="ed-pane" data-pane="sprites" id="edSpritePanel" hidden></div>
+          <div class="ed-pane" data-pane="model3d" id="edModelPanel" hidden></div>
+          <div class="ed-pane" data-pane="help" id="edHelpPanel" hidden></div>
+          <div class="ed-pane" data-pane="debug" id="edDebugPanel" hidden></div>
+        </aside>
+      </div>
+      <div class="ed-dbg" id="edDbg" hidden>
+        <span class="dbg-where" id="edDbgWhere"></span>
+        <button class="tb" data-cmd="resume" title="Weiter bis zum nächsten Haltepunkt (F8)">▶ Weiter</button>
+        <button class="tb" data-cmd="frame" title="Genau ein Bild weiter (F6)">⏭ Bild</button>
+        <button class="tb" data-cmd="step" title="Nächste Zeile (F10)">↧ Schritt</button>
+        <button class="tb" data-cmd="vars" title="Alle Variablen zeigen">Variablen</button>
+      </div>
+      <div class="ed-keys" id="edKeys" aria-label="Sonderzeichen"></div>
+      <div class="ed-log" id="edLog" aria-live="polite"></div>
+    </section>
+
+    <main class="stage" id="stage">
+      <div class="console" id="console">
+        <div class="c-top">
+          <div class="pill-group">
+            <button class="pill-btn" id="btnShelf" aria-label="Kartridge-Regal öffnen"><span>▤</span><em class="lbl"> Regal</em></button>
+            <button class="pill-btn" id="btnStudio" aria-label="8BOY Studio öffnen"><span>✎</span><em class="lbl"> Studio</em></button>
+          </div>
+          <div class="slot" id="slot">
+            <div class="slot-mouth"></div>
+            <div class="slot-cart" id="slotCart" hidden></div>
+            <span class="slot-hint">▼ Kartridge hier einlegen ▼</span>
+            <span class="led" id="led" title="Betriebsanzeige"></span>
+          </div>
+          <div class="pill-group">
+            <button class="pill-btn" id="btnA11y" hidden aria-label="Zugänglichkeit: Vorlesen, Kontrast, Tempo" title="Zugänglichkeit"><span>♿</span><em class="lbl"> Zugänglich</em></button>
+            <button class="pill-btn" id="btnInnen" aria-label="Konsole umdrehen und hineinschauen" title="Hineinschauen: Chips, Speicher, Klang"><span>⟲</span><em class="lbl"> Innen</em></button>
+            <button class="pill-btn" id="btnBig" aria-label="Großbild umschalten" title="Großbild"><span>⤢</span><em class="lbl"> Groß</em></button>
+            <button class="pill-btn" id="btnMenu" aria-label="Menü"><span>≡</span><em class="lbl"> Menü</em></button>
+          </div>
+        </div>
+
+        <div class="c-screen">
+          <div class="bezel">
+            <div class="glass">
+              <canvas id="screen" width="240" height="160"></canvas>
+              <button class="bild-btn" id="btnBild" hidden aria-label="Bild der älteren Kartridge: Rahmen, füllen oder strecken" title="Bild: Rahmen / füllen / strecken">⤢</button>
+              <div class="lcd-grid" id="lcdGrid"></div>
+              <div class="screen-off" id="screenOff">Zum Einschalten tippen</div>
+            </div>
+            <div class="bezel-foot"><span class="bezel-label" id="bezelLabel">PIXEL-LCD · 32 FARBEN · 4 KANÄLE</span></div>
+          </div>
+        </div>
+
+        <div class="c-dpad">
+          <div class="dpad" id="dpad" data-btn="dpad" role="group" aria-label="Steuerkreuz">
+            <div class="dpad-h"></div><div class="dpad-v"></div><div class="dpad-c"></div>
+            <span class="arr up">▲</span><span class="arr down">▼</span><span class="arr left">◀</span><span class="arr right">▶</span>
+          </div>
+        </div>
+
+        <div class="c-ab">
+          <div class="ab">
+            <div class="round-btn y" data-btn="9" role="button" aria-label="Taste Y"><span>Y</span></div>
+            <div class="round-btn x" data-btn="8" role="button" aria-label="Taste X"><span>X</span></div>
+            <div class="round-btn b" data-btn="5" role="button" aria-label="Taste B"><span>B</span></div>
+            <div class="round-btn a" data-btn="4" role="button" aria-label="Taste A"><span>A</span></div>
+          </div>
+        </div>
+
+        <div class="c-sys">
+          <div class="sys-btn opt" data-btn="7" role="button" aria-label="Taste OPTION"><div class="pill"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 5h11M2.5 11h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="5.5" cy="5" r="2.3" fill="currentColor"/><circle cx="10.5" cy="11" r="2.3" fill="currentColor"/></svg></div><span>OPTION</span></div>
+          <div class="brand" id="brand" role="img" aria-label="8BOY"><svg class="wm" viewBox="0 0 60 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="3.3"/><circle cx="6" cy="12.2" r="4"/><path d="M15.5 1.7V16.2M15.5 1.7h3.6a3.3 3.3 0 0 1 0 6.6H15.5M15.5 8.3h4.2a3.95 3.95 0 0 1 0 7.9H15.5"/><ellipse cx="35.5" cy="9" rx="6.4" ry="7.3"/><path d="M47.6 1.7L52.8 9L58 1.7M52.8 9V16.2"/></g></svg><b class="gen" id="brandGen"></b></div>
+          <div class="sys-btn menu" data-btn="6" role="button" aria-label="Taste MENÜ"><div class="pill"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10M3 8h10M3 11.5h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><span>MENÜ</span></div>
+        </div>
+
+        <div class="shoulder l" data-btn="10" role="button" aria-label="Schultertaste L"><span>L</span></div>
+        <div class="shoulder r" data-btn="11" role="button" aria-label="Schultertaste R"><span>R</span></div>
+
+        <div class="speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </main>
+
+    <aside class="shelf" id="shelf" aria-label="Kartridge-Regal">
+      <div class="shelf-head">
+        <h2>Kartridge-Regal</h2>
+        <button class="tb tb-run shelf-store" id="btnStore" title="Spiele, Lernspiele und Lektionen ins Regal holen">Store</button>
+        <button class="tb tb-close" id="shelfClose" aria-label="Regal schließen">✕</button>
+      </div>
+      <p class="shelf-hint"><span class="for-mouse">Kartridge auf die Konsole <b>ziehen</b> – oder antippen. Eigene <code>.lua</code>-Dateien und PNG-Kartridges einfach auf das Fenster fallen lassen.</span><span class="for-touch">Kartridge <b>antippen</b> – oder festhalten und auf die Konsole ziehen. Eigene <code>.lua</code>-Dateien und PNG-Kartridges kommen über „Datei laden“ ins Regal.</span></p>
+      <div class="shelf-list" id="shelfList"></div>
+      <div class="shelf-foot">
+        <button class="tb" id="btnNew">✎ Neue Kartridge im Studio</button>
+        <button class="tb" id="btnSaves" title="Spielstände ansehen, sichern und wiederherstellen">💾 Spielstände</button>
+        <label class="tb">Datei laden<input type="file" id="fileInput" accept=".lua,.txt,.8b,.png,.json,.8bpak" hidden></label>
+        <button class="tb" id="btnInstall" hidden>App installieren</button>
+      </div>
+      <div class="shelf-foot shelf-links">
+        <a class="tb for-mouse" href="baukasten.html" title="Spiele ohne Code zusammenklicken – am besten am Computer">Baukasten</a>
+      </div>
+      <div class="shelf-theme shelf-model">
+        <span>Konsole</span>
+        <button class="model-btn" data-model="8" title="8BOY: 240×160, 32 Farben, 4 Kanäle">8BOY</button>
+        <button class="model-btn" data-model="16" title="8BOY 16: 256×224, 256 Farben, Perspektivboden, 8 Kanäle mit Klangproben">8BOY <b>16</b></button>
+        <button class="model-btn" data-model="32" title="8BOY 32: 320×240, 3D-Polygone, 16 Kanäle">8BOY <b>32</b></button>
+        <button class="model-btn" data-model="64" title="8BOY 64: Heimkonsole, 640×360 in 16:9, eigener Grafikchip auf der Grafikkarte (WebGL2)">8BOY <b>64</b></button>
+        <button class="model-btn" data-model="128" title="8BOY 128 (in Arbeit): 1280×720, HDR, Materialien, Asset-Pakete" hidden>8BOY <b>128</b></button>
+      </div>
+      <div class="shelf-theme">
+        <span>Gehäuse</span>
+        <button class="swatch" data-theme="classic" title="Papier" aria-label="Gehäuse Papier"></button>
+        <button class="swatch" data-theme="grape" title="Brombeere" aria-label="Gehäuse Brombeere"></button>
+        <button class="swatch" data-theme="mint" title="Minze" aria-label="Gehäuse Minze"></button>
+        <button class="swatch" data-theme="night" title="Nacht" aria-label="Gehäuse Nacht"></button>
+        <button class="swatch" data-theme="sun" title="Sonne" aria-label="Gehäuse Sonne"></button>
+      </div>
+      <div class="shelf-keys">
+        <b>Tastatur:</b> Pfeile/WASD · A = X/K/Leertaste · B = Z/Y/J · MENÜ = Enter/E · OPTION = Shift/Q · 8BOY 16: X = C/I · Y = V/U · L = F/1 · R = G/2 · <b>Konsolenmenü = Esc/M/P</b> oder MENÜ gedrückt halten. Gamepads werden erkannt (Xbox, PlayStation, Switch): Mit der Start- bzw. Menütaste macht ein Gamepad als weiterer Spieler mit. <b>TV-Modus</b> (Startmenü → Ansicht): Bild füllt den Fernseher, Handys werden per QR-Code zum Controller.
+      </div>
+      <div class="shelf-about">
+        <b>Über 8BOY</b> · ein Projekt der YOURLEAF GmbH. Keine Cookies, kein Tracking: Spielstände und eigene Kartridges bleiben nur in deinem Browser.
+        8BOY ist ein unabhängiges Projekt der YOURLEAF GmbH und steht in keiner Verbindung zu Nintendo, Sony, Microsoft oder Sega. Genannte Marken gehören ihren Inhabern.
+        <a href="LIZENZEN.txt" target="_blank" rel="noopener">Lizenzen</a>
+        <a id="lnkImpressum" target="_blank" rel="noopener" hidden>· Impressum</a>
+        <a id="lnkDatenschutz" target="_blank" rel="noopener" hidden>· Datenschutz</a>
+      </div>
+    </aside>
+  </div>
+
+  <div class="cart-dialog" id="cartDialog" hidden>
+    <div class="cd-card" role="dialog" aria-modal="true" aria-labelledby="cdTitle">
+      <div class="cd-cart" id="cdCart"></div>
+      <div class="cd-info">
+        <h3 id="cdTitle"></h3>
+        <p class="cd-meta" id="cdMeta"></p>
+        <p id="cdDesc"></p>
+        <p class="cd-license" id="cdLicense" hidden></p>
+        <div class="cd-confirm" id="cdConfirm" hidden role="alertdialog" aria-labelledby="cdConfirmText">
+          <p id="cdConfirmText"></p>
+          <div class="cd-actions">
+            <button class="tb tb-danger" id="cdConfirmYes">Endgültig löschen</button>
+            <button class="tb" id="cdConfirmSave" title="Packung als PNG-Kartridge herunterladen">⇩ Erst sichern</button>
+            <button class="tb" id="cdConfirmNo">Behalten</button>
+          </div>
+        </div>
+        <div class="cd-actions" id="cdActions">
+          <button class="tb tb-run" id="cdInsert">Einlegen</button>
+          <button class="tb" id="cdManual">Anleitung</button>
+          <button class="tb" id="cdCode">Code ansehen</button>
+          <button class="tb" id="cdDownload" title="Als .lua-Datei herunterladen">⇩ Lua</button>
+          <button class="tb" id="cdPackage" title="Packung als PNG-Kartridge herunterladen – zum Verschicken">⇩ Packung</button>
+          <button class="tb tb-danger" id="cdDelete">Löschen</button>
+        </div>
+      </div>
+      <button class="tb tb-close cd-close" id="cdClose" aria-label="Schließen">✕</button>
+    </div>
+  </div>
+
+  <div class="store" id="store" hidden>
+    <div class="st-card" role="dialog" aria-modal="true" aria-labelledby="stTitle">
+      <div class="st-head">
+        <div>
+          <h3 id="stTitle">8BOY Store</h3>
+          <p>Spiele, Lernspiele und Lektionen fürs Regal – kostenlos. Was du holst, bleibt auch offline da.</p>
+        </div>
+        <button class="tb tb-close" id="stClose" aria-label="Store schließen">✕</button>
+      </div>
+      <div class="st-tabs" role="tablist">
+        <button role="tab" id="stTabStore" aria-selected="true">Store</button>
+        <button role="tab" id="stTabSaves" aria-selected="false">💾 Meine Spielstände</button>
+      </div>
+      <div class="st-saves" id="stSaves" hidden></div>
+      <div class="st-find">
+        <input type="search" id="stSearch" placeholder="Suchen: Titel, Thema, Konsole …" aria-label="Im Store suchen" autocomplete="off">
+        <span class="st-count" id="stCount" aria-live="polite"></span>
+      </div>
+      <div class="st-chips" id="stChips" aria-label="Kategorie"></div>
+      <div class="st-chips st-sub" id="stFilter" aria-label="Filter"></div>
+      <div class="st-grid" id="stGrid"></div>
+      <div class="st-detail" id="stDetail" hidden></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="config.js"></script>
+  <script src="vendor/fengari-web.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

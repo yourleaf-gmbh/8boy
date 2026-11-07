@@ -1,0 +1,9 @@
+node_modules/
+dist/
+shots/
+pakete/
+geschenke/
+*.log
+.env
+.env.*
+*.local.*

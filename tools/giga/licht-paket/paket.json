@@ -1,0 +1,11 @@
+{
+ "paket": "giga-licht",
+ "version": 1,
+ "standard": { "vorab": true, "lizenz": "CC0", "quelle": "YOURLEAF, gebaut mit tools/giga/licht_hof.py (Blender, Cycles-Bake)" },
+ "assets": {
+  "hof": { "datei": "hof.glb", "echt": true },
+  "hof.licht": { "datei": "hof-licht.png" },
+  "hof.umgebung": { "datei": "hof-umgebung.png" },
+  "himmel": { "datei": "himmel.png" }
+ }
+}

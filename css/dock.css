@@ -1,0 +1,208 @@
+/* Dock: TV-Modus (body.tv / .app.tv) und Handy als Controller (body.pad-mode). Gesteuert von js/dock.js und js/pad.js. */
+
+/* ------------------------------------------------------------- TV: nur das Bild */
+body.tv { background: #000; }
+.app.tv .stage { position: fixed; inset: 0; padding: 0; }
+.app.tv .console { position: fixed; inset: 0; width: auto !important; height: auto; max-width: none; max-height: none; margin: 0;
+  display: flex; align-items: center; justify-content: center; padding: 0; border-radius: 0; background: #000; box-shadow: none; }
+.app.tv .console > :not(.c-screen) { display: none !important; }
+.app.tv .c-screen { grid-area: auto; }
+.app.tv .bezel { padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.app.tv .bezel-foot, .app.tv .brand { display: none; }
+.app.tv .glass { box-shadow: none; border-radius: 0; }
+.app.tv .screen-off { font-size: 28px; }
+/* Fenster für den Sofa-Abstand größer */
+.app.tv .shelf { zoom: 1.3; }
+body.tv .cd-card { zoom: 1.45; }
+body.tv .st-card { zoom: 1.3; }
+body.tv .ub-bar, body.tv .ub-hint, body.tv .bk-nav, body.tv .bk-close { zoom: 1.3; }
+body.tv .toast { font-size: 22px; padding: 14px 24px; bottom: 40px; }
+
+/* Fokus der Gamepad-Navigation: ein Ring über dem gewählten Element (Kartridges sind ausgeschnitten, Umrisse gingen verloren) */
+.tv-ring { position: fixed; z-index: 1001; pointer-events: none; border: 4px solid #fee761; border-radius: 12px;
+  box-shadow: 0 0 0 6px rgba(254, 231, 97, .25), 0 0 24px rgba(254, 231, 97, .5); transition: left .12s, top .12s, width .12s, height .12s; }
+.tv-ring[hidden] { display: none; }
+body.tv .tv-focus.cart, body.tv .tv-focus.pkg { transform: translateY(-6px); }
+
+/* Statusleiste unten links */
+.tv-bar { position: fixed; left: 24px; bottom: 20px; z-index: 40; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: calc(100vw - 48px);
+  font: 600 16px system-ui, sans-serif; color: #e9e7f2; transition: opacity .6s; pointer-events: none; }
+.tv-bar.dim { opacity: .28; }
+.tv-bar[hidden] { display: none; }
+.tv-logo { font-weight: 900; letter-spacing: .08em; color: #fee761; margin-right: 6px; text-shadow: 0 1px 2px #000; }
+.tv-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px 4px 4px; border-radius: 999px; background: rgba(20, 22, 30, .82); border: 2px solid var(--pc, #555); }
+.tv-chip b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--pc, #555); color: #fff; font-size: 14px; }
+.tv-chip.frei { opacity: .55; border-style: dashed; }
+.tv-wait, .tv-net { padding: 4px 12px; border-radius: 999px; background: rgba(20, 22, 30, .82); }
+.tv-wait { color: #fee761; }
+.p1 { --pc: #e84a5f; } .p2 { --pc: #3c9cf0; } .p3 { --pc: #4cc479; } .p4 { --pc: #f2c230; }
+
+/* Hinweis beim Mitmachen oben in der Mitte */
+.tv-card { position: fixed; left: 50%; top: 24px; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 24px; border-radius: 14px; background: rgba(20, 22, 30, .92); border: 3px solid var(--pc, #888); color: #f5f2e8; font: 600 20px system-ui, sans-serif;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .6); pointer-events: none; text-align: center; }
+.tv-card b { color: var(--pc); }
+.tv-card small { font-size: 15px; font-weight: 500; opacity: .85; }
+.tv-card[hidden] { display: none; }
+
+/* Mitspiel-Tafel: neben dem Bild (genug Rand) oder oben rechts, wenn gerade kein Spiel läuft */
+.tv-panel { position: fixed; z-index: 45; right: 24px; top: 24px; width: 270px; padding: 16px 18px; border-radius: 16px;
+  background: rgba(20, 22, 30, .9); border: 1px solid #3a3f52; color: #e9e7f2; font: 15px/1.4 system-ui, sans-serif; box-shadow: 0 16px 50px rgba(0, 0, 0, .55); }
+.tv-panel.beside { top: 50%; right: max(16px, calc((var(--side) - 290px) / 2)); transform: translateY(-50%); width: min(290px, calc(var(--side) - 32px)); }
+.tv-panel[hidden] { display: none; }
+.tv-panel h3 { margin: 0 0 4px; font-size: 20px; color: #fee761; }
+.tv-panel h4 { margin: 12px 0 4px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #9aa0b8; }
+.tv-how { margin: 0 0 10px; color: #c9cbe0; }
+.tv-qr svg { display: block; width: 100%; height: auto; border-radius: 8px; image-rendering: pixelated; }
+.tv-qr-off { padding: 24px 8px; text-align: center; color: #9aa0b8; border: 1px dashed #3a3f52; border-radius: 8px; }
+.tv-code { margin: 8px 0 0; text-align: center; font-size: 16px; }
+.tv-code b { font: 800 24px ui-monospace, Consolas, monospace; letter-spacing: .14em; color: #fff; }
+.tv-code small { display: block; font-size: 11px; color: #9aa0b8; word-break: break-all; }
+.tv-labels p { margin: 4px 0; font-size: 13px; color: #c9cbe0; border-left: 4px solid var(--pc); padding-left: 8px; }
+.tv-labels p b { color: #fff; }
+.tv-off { margin-top: 12px; width: 100%; }
+
+/* ------------------------------------------------------------- Handy als Controller */
+/* Gehäuse wie die 8BOY 64: Nachtblau, Tasten Türkis (A, X) und Nachtblau (B, Y), Bildschirm mit Neon-Schimmer.
+   Quer: Steuerkreuz | Bildschirm | Tasten. Hochkant: Bildschirm oben, darunter Steuerkreuz und Tasten (Handheld). */
+body.pad-mode .app, body.pad-mode .toast, body.pad-mode .tv-bar, body.pad-mode .tv-panel { display: none !important; }
+body.pad-mode { background: #111223; }
+.pad { --pc: #888; --body: #1d1f33; --body-hi: #2c2f4d; --body-lo: #111223; --bezel: #07080f; --bezel-lo: #020206; --label: #8f96c8;
+  --print: #b9c0ff; --sys: #3b3f66; --dpad: #0e0f1c;
+  --key-a: #2ce8f5; --key-a-lo: #128a93; --key-a-ink: #08202a; --key-b: #33376a; --key-b-lo: #151733; --key-b-ink: #b9c0ff;
+  position: fixed; inset: 0; z-index: 200; display: grid; gap: 8px 18px;
+  grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas: "shl screen shr" "dpad screen face" "dpad mid face";
+  padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  background: radial-gradient(120% 60% at 30% 0%, var(--body-hi), transparent 60%), linear-gradient(170deg, var(--body-hi), var(--body) 35%, var(--body-lo));
+  color: #e9e7f2; font: 600 16px system-ui, sans-serif; overflow: hidden;
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.pad [hidden] { display: none !important; }
+
+/* Bildschirm */
+.pad-screen { grid-area: screen; display: flex; flex-direction: column; align-items: stretch; min-height: 0; min-width: 0; }
+.pad-bezel { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 8px 14px 14px; border-radius: 18px;
+  background: linear-gradient(var(--bezel), var(--bezel-lo));
+  box-shadow: 0 0 0 1px rgba(122,140,255,.25), 0 0 24px rgba(92,240,168,.08) inset, inset 0 2px 3px rgba(255,255,255,.12), 0 2px 0 rgba(255,255,255,.12); }
+.pad-bezel-top { display: flex; align-items: center; justify-content: center; gap: 8px; height: 14px; margin-bottom: 6px; }
+.pad-bezel-top .pad-led { order: 2; }
+.pad-led { width: 8px; height: 8px; border-radius: 50%; flex: none; background: #3a1418; box-shadow: inset 0 1px 2px rgba(0,0,0,.6); }
+.pad.live .pad-led { background: var(--pc); box-shadow: 0 0 6px var(--pc), 0 0 14px var(--pc); }
+.pad-label { font-size: 9px; letter-spacing: .14em; color: var(--label); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pad-glass { position: relative; flex: 1; min-height: 0; overflow: hidden; border-radius: 3px; container-type: size;
+  background: radial-gradient(90% 80% at 50% 30%, #1b1f4a, #07081a 70%); box-shadow: 0 0 0 2px #000; }
+.pad-glass::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); }
+.pad-idle { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 6cqw; padding: 4cqh 6cqw; }
+.pad-num { font: italic 900 min(70cqh, 34cqw)/1 system-ui, sans-serif; color: var(--pc);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--pc) 60%, transparent), 0 4px 0 rgba(0,0,0,.45); }
+.pad-idle > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pad-p { font-size: min(13cqh, 8cqw); color: #fff; letter-spacing: .03em; white-space: nowrap; }
+.pad-msg { font-size: min(9cqh, 5.5cqw); color: #9aa0d8; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* padinfo: Text, Farbe, Symbol der Kartridge – groß */
+.pad-info { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqh; padding: 5cqh 6cqw;
+  background: #10122a; color: #fff; text-align: center; }
+.pad-sym { font-size: min(44cqh, 36cqw); line-height: 1; filter: drop-shadow(0 4px 0 rgba(0,0,0,.25)) drop-shadow(0 0 14px rgba(255,255,255,.25)); }
+.pad-txt { font: 900 min(17cqh, 10cqw)/1.08 system-ui, sans-serif; letter-spacing: .01em; overflow-wrap: anywhere; text-wrap: balance;
+  text-shadow: 0 2px 0 rgba(0,0,0,.18); }
+.pad-info.lang .pad-txt { font-size: min(12cqh, 7cqw); }
+.pad-info.lang .pad-sym { font-size: min(32cqh, 26cqw); }
+.pad-info.neu .pad-sym, .pad-info.neu .pad-txt { animation: pad-pop .32s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes pad-pop { from { transform: scale(.4); opacity: 0; } }
+.pad-brand { margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; font-size: 11px; color: #c9d0ff; }
+.pad-brand svg { height: 15px; width: auto; filter: drop-shadow(0 0 6px rgba(122,140,255,.35)); }
+.pad-gen { font: 800 .95em/1 ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif; padding: 3px 7px 2px; border-radius: 999px; color: #0a0b18;
+  background: linear-gradient(90deg, #2ce8f5, #b07cff 60%, #ff5a8e); }
+.pad-gen:empty { display: none; }
+.pad-brand i { font-style: normal; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
+
+/* Schultertasten */
+.pad-sh { position: relative; height: 48px; display: grid; place-items: center; border-radius: 22px 22px 10px 10px;
+  background: linear-gradient(var(--body-hi), var(--body-lo)); box-shadow: inset 0 2px 0 rgba(255,255,255,.18), 0 4px 0 #0a0b16, 0 6px 10px rgba(0,0,0,.35); }
+.pad-sh.l { grid-area: shl; } .pad-sh.r { grid-area: shr; }
+.pad-sh span { font-size: 15px; font-weight: 800; color: var(--print); }
+
+/* Steuerkreuz */
+.pad-dpad { grid-area: dpad; align-self: center; justify-self: center; position: relative; width: min(46vh, 30vw); height: min(46vh, 30vw); }
+.pad-dpad::before { content: ""; position: absolute; inset: -8%; border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,.22), transparent 70%); }
+.pad-dpad .dh, .pad-dpad .dv { position: absolute; border-radius: 9px; background: linear-gradient(145deg, #3a3e62, var(--dpad));
+  box-shadow: 0 5px 0 #05060c, 0 8px 12px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.1); transition: transform .05s; }
+.pad-dpad .dh { left: 0; right: 0; top: 33.3%; height: 33.4%; }
+.pad-dpad .dv { top: 0; bottom: 0; left: 33.3%; width: 33.4%; }
+.pad-dpad.p-u .dv { transform: perspective(300px) rotateX(10deg); } .pad-dpad.p-d .dv { transform: perspective(300px) rotateX(-10deg); }
+.pad-dpad.p-l .dh { transform: perspective(300px) rotateY(-10deg); } .pad-dpad.p-r .dh { transform: perspective(300px) rotateY(10deg); }
+.pad-dpad b { position: absolute; z-index: 1; font-size: min(5vh, 4vw, 22px); color: #5b6190; }
+.pad-dpad .u { top: 7%; left: 50%; transform: translateX(-50%); } .pad-dpad .d { bottom: 7%; left: 50%; transform: translateX(-50%); }
+.pad-dpad .l { left: 7%; top: 50%; transform: translateY(-50%); } .pad-dpad .r { right: 7%; top: 50%; transform: translateY(-50%); }
+.pad-dpad.p-u .u, .pad-dpad.p-d .d, .pad-dpad.p-l .l, .pad-dpad.p-r .r { color: var(--pc); text-shadow: 0 0 8px var(--pc); }
+
+/* MENÜ / OPTION: runde Tasten mit Symbol, Wort darunter */
+.pad-mid { grid-area: mid; justify-self: center; align-self: end; display: flex; gap: 22px; }
+.pad-sys { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 10px; }
+.pad-sys i { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: rgba(255,255,255,.88);
+  background: radial-gradient(circle at 38% 30%, color-mix(in srgb, var(--sys) 70%, white), var(--sys) 60%);
+  box-shadow: 0 3px 0 rgba(0,0,0,.45), 0 5px 10px rgba(0,0,0,.3); }
+.pad-sys svg { width: 18px; height: 18px; }
+.pad-sys span { font-size: 10px; font-weight: 700; letter-spacing: .14em; color: var(--print); }
+.pad-sys.on i { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.4); background: var(--pc); }
+
+/* A B X Y: im Quadrat (oben Y X, unten B A), rechts Türkis, links Nachtblau – Blattform wie am Gehäuse */
+.pad-face { grid-area: face; align-self: center; justify-self: center; position: relative; width: min(48vh, 31vw); height: min(48vh, 31vw); }
+.pad-btn { --k: var(--key-b); --k-lo: var(--key-b-lo); --lc: var(--key-b-ink);
+  position: absolute; width: 44%; height: 44%; border-radius: 26% 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--k) 65%, white), var(--k) 48%, color-mix(in srgb, var(--k) 82%, black));
+  box-shadow: 0 5px 0 var(--k-lo), 0 8px 12px rgba(0,0,0,.4); transition: transform .05s, box-shadow .05s; }
+.pad-btn.a, .pad-btn.x { --k: var(--key-a); --k-lo: var(--key-a-lo); --lc: var(--key-a-ink); }
+.pad-btn span { font: 800 min(6vh, 5vw, 28px)/1 ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif; color: var(--lc); }
+.pad-btn.y { left: 0; top: 0; } .pad-btn.x { right: 0; top: 0; }
+.pad-btn.b { left: 0; bottom: 0; } .pad-btn.a { right: 0; bottom: 0; }
+.pad-btn.on { transform: translateY(4px); box-shadow: 0 1px 0 var(--k-lo), 0 0 0 3px color-mix(in srgb, var(--pc) 60%, transparent), 0 0 22px color-mix(in srgb, var(--pc) 45%, transparent); }
+.pad-sh.on { transform: translateY(3px); box-shadow: inset 0 2px 4px rgba(0,0,0,.35), 0 0 0 2px color-mix(in srgb, var(--pc) 60%, transparent); }
+/* 8BOY / 8BOY 32 ohne X, Y, L, R: nur A und B, nebeneinander */
+.pad:not(.full) .pad-btn.x, .pad:not(.full) .pad-btn.y, .pad:not(.full) .pad-sh { display: none; }
+.pad:not(.full) .pad-btn { width: 46%; height: 46%; top: 27%; bottom: auto; }
+.pad-speaker { display: none; }
+.pad-again { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: rgba(10, 11, 24, .9); text-align: center; padding: 20px; }
+
+/* Hochkant: Handheld wie die 8BOY 64 */
+@media (orientation: portrait) {
+  .pad { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 10px 12px;
+    grid-template-areas: "shl shr" "screen screen" "dpad face" "mid mid"; padding-top: max(6px, env(safe-area-inset-top)); }
+  .pad:not(.full) { grid-template-rows: 0 auto minmax(0, 1fr) auto; }
+  .pad-sh { height: 44px; margin: 0 4px; }
+  .pad-bezel { flex: none; padding: 10px 12px 12px; border-radius: 18px; }
+  .pad-glass { flex: none; aspect-ratio: 4 / 3; max-height: 38vh; }
+  .pad-idle { flex-direction: column; gap: 2cqh; }
+  .pad-idle > div { align-items: center; }
+  .pad-num { font-size: min(52cqh, 40cqw); }
+  .pad-brand { font-size: 12px; margin-top: 10px; }
+  .pad-brand svg { height: 20px; }
+  .pad-dpad { width: min(40vw, 27vh); height: min(40vw, 27vh); justify-self: start; margin-left: 2vw; }
+  .pad-face { width: min(42vw, 28vh); height: min(42vw, 28vh); justify-self: end; margin-right: 2vw; }
+  .pad-btn span { font-size: min(8vw, 30px); }
+  .pad-dpad b { font-size: min(5vw, 22px); }
+  .pad-mid { align-self: start; gap: 18px; padding-bottom: 5vh; }
+}
+
+/* Handy als Controller ohne TV-Modus (Menü → „Handy als Controller“) */
+.pad-pair { position: fixed; inset: 0; z-index: 90; background: rgba(5, 6, 10, .66); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.pp-card { background: var(--panel, #171922); color: var(--text, #e8e9f0); border: 1px solid var(--line, #2b2f3d); border-radius: 16px; padding: 20px; width: min(360px, 100%); max-height: calc(100vh - 32px); overflow: auto; text-align: center; }
+.pp-card h3 { margin: 0 0 6px; font-size: 19px; }
+.pp-card > p { margin: 0 0 12px; color: var(--muted, #9aa0b8); font-size: 13.5px; line-height: 1.45; }
+.pp-card .tv-qr { width: min(240px, 70vw); margin: 0 auto; background: #fff; padding: 8px; border-radius: 10px; }
+.pp-list { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0 4px; min-height: 32px; }
+.pp-list .tv-chip { color: #fff; font-size: 13px; }
+.pp-none { color: var(--muted, #9aa0b8); font-size: 13px; align-self: center; }
+.pp-actions { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+
+/* Eigener Streifen unten für die Statusleiste: das Bild endet darüber (js/dock.js TV_BAR_H) */
+body.tv { --tv-bar-h: 64px; }
+.app.tv .console { padding-bottom: var(--tv-bar-h); }
+body.tv .tv-bar { left: 0; right: 0; bottom: 0; height: var(--tv-bar-h); box-sizing: border-box; padding: 0 24px; max-width: none;
+  flex-wrap: nowrap; overflow: hidden; z-index: 96; background: #000; border-top: 1px solid #1d2030; }
+body.tv .tv-bar.dim { opacity: 1; } body.tv .tv-bar.dim > * { opacity: .55; transition: opacity .6s; }
+body.tv .store, body.tv .cart-dialog, body.tv .pad-pair, body.tv .hw { padding-bottom: calc(var(--tv-bar-h) + 8px); }
+/* Regal, Store und Kartridge-Fenster enden über der Statusleiste (zoom eingerechnet) */
+body.tv .app .shelf { padding-bottom: calc(var(--tv-bar-h) / 1.3); }
+body.tv .st-card { max-height: calc((100vh - var(--tv-bar-h) - 40px) / 1.3); }
+body.tv .cd-card { max-height: calc((100vh - var(--tv-bar-h) - 40px) / 1.45); overflow: auto; }

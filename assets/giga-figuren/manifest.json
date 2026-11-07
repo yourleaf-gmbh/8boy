@@ -1,0 +1,15 @@
+{
+ "paket": "giga-figuren",
+ "version": 1,
+ "gebaut": "2026-10-29",
+ "assets": {
+  "pilot": {
+   "datei": "0e96d7e11f686e1f.b8s",
+   "typ": "figur",
+   "groesse": 344512,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/figur_pilot.py (Blender)"
+  }
+ }
+}

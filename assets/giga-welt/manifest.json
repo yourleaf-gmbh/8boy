@@ -1,0 +1,199 @@
+{
+ "paket": "giga-welt",
+ "version": 1,
+ "gebaut": "2026-10-30",
+ "assets": {
+  "insel-0-0": {
+   "datei": "2992e7fcd35051f5.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-1-0": {
+   "datei": "ce6b79e1ff02f5ad.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-2-0": {
+   "datei": "7b6d4640fe0b41b2.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-3-0": {
+   "datei": "cf1083c0b0275bce.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-0-1": {
+   "datei": "caf803c754797bfa.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-1-1": {
+   "datei": "2910ec5c9ae296af.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-2-1": {
+   "datei": "60b8fd19ba7b3bdf.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-3-1": {
+   "datei": "ef48b699dae05f54.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-0-2": {
+   "datei": "9302d65c333cf23b.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-1-2": {
+   "datei": "a635b9ba84bf8872.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-2-2": {
+   "datei": "e7523468491131fa.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-3-2": {
+   "datei": "a6fb390e57e4d4de.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-0-3": {
+   "datei": "28861f5797718b24.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-1-3": {
+   "datei": "769c7b6540e9f96d.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-2-3": {
+   "datei": "b0224fcf602eeadc.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "insel-3-3": {
+   "datei": "32e42fd42cd25973.b8m",
+   "typ": "modell",
+   "groesse": 95751,
+   "vorab": false,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "baum": {
+   "datei": "dbd6956758998d91.b8m",
+   "typ": "modell",
+   "groesse": 17116,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "baum.lod1": {
+   "datei": "af2b21ae6e81bf61.b8m",
+   "typ": "modell",
+   "groesse": 6974,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "fels": {
+   "datei": "f5d56d52ab497f55.b8m",
+   "typ": "modell",
+   "groesse": 21238,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "fels.lod1": {
+   "datei": "14a4d4bf0e04d7c2.b8m",
+   "typ": "modell",
+   "groesse": 9229,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "buggy": {
+   "datei": "c4e5deb1d5eba307.b8m",
+   "typ": "modell",
+   "groesse": 6168,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "rad": {
+   "datei": "168ad7e3659ea2ef.b8m",
+   "typ": "modell",
+   "groesse": 5250,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "baum.lod2": {
+   "datei": "e6f244700ef78590.b8m",
+   "typ": "modell",
+   "groesse": 959,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  },
+  "fels.lod2": {
+   "datei": "4e69055d9c197278.b8m",
+   "typ": "modell",
+   "groesse": 1916,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/welt_paket.mjs"
+  }
+ }
+}

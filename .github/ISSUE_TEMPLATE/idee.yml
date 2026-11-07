@@ -1,0 +1,27 @@
+name: Idee oder Wunsch
+description: Vorschlag für Konsole, Studio, Baukasten, Lua-Befehle oder Dokumentation.
+labels: [idee]
+body:
+  - type: textarea
+    id: idee
+    attributes:
+      label: Was wünschst du dir?
+    validations:
+      required: true
+  - type: textarea
+    id: warum
+    attributes:
+      label: Wofür brauchst du es?
+      description: Welches Spiel oder welche Lektion wird damit möglich oder einfacher?
+  - type: textarea
+    id: api
+    attributes:
+      label: Vorschlag für die Umsetzung (optional)
+      description: z. B. ein neuer Lua-Befehl mit Parametern und Beispiel.
+      render: lua
+  - type: checkboxes
+    id: selbst
+    attributes:
+      label: Mitmachen
+      options:
+        - label: Ich würde das gern selbst umsetzen.

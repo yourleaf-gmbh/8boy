@@ -1,0 +1,39 @@
+{
+ "paket": "giga-licht",
+ "version": 1,
+ "gebaut": "2026-10-30",
+ "assets": {
+  "hof": {
+   "datei": "a93a633fe12febc0.b8m",
+   "typ": "modell",
+   "groesse": 26540,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/licht_hof.py (Blender, Cycles-Bake)"
+  },
+  "hof.licht": {
+   "datei": "f1f0c8be59b8ed88.png",
+   "typ": "bild",
+   "groesse": 1214521,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/licht_hof.py (Blender, Cycles-Bake)"
+  },
+  "hof.umgebung": {
+   "datei": "bf14f3062711617e.png",
+   "typ": "bild",
+   "groesse": 191754,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/licht_hof.py (Blender, Cycles-Bake)"
+  },
+  "himmel": {
+   "datei": "f4c6b01a9d342eaa.png",
+   "typ": "bild",
+   "groesse": 13049,
+   "vorab": true,
+   "lizenz": "CC0",
+   "quelle": "YOURLEAF, gebaut mit tools/giga/licht_hof.py (Blender, Cycles-Bake)"
+  }
+ }
+}

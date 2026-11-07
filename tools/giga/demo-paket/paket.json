@@ -1,0 +1,12 @@
+{
+ "paket": "giga-demo",
+ "version": 1,
+ "standard": { "vorab": true, "lizenz": "CC0", "quelle": "YOURLEAF, gebaut mit tools/giga/demo_paket.py (Blender)" },
+ "assets": {
+  "kugel": { "datei": "kugel.glb" },
+  "kiste": { "datei": "kiste.glb", "giga": true },
+  "fliesen.farbe": { "datei": "fliesen-farbe.png" },
+  "fliesen.normal": { "datei": "fliesen-normal.png" },
+  "fliesen.rm": { "datei": "fliesen-rm.png" }
+ }
+}
